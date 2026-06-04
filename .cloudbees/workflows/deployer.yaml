@@ -1,18 +1,18 @@
-  apiVersion: automation.cloudbees.io/v1alpha1
+  apiVersion: automation.cloudbees.io/v1alpha1                                                                                                       
   kind: workflow                                                                                                                                     
-  name: deployer  
+  name: deployer                                                                                                                                     
                                                                                                                                                      
-  on:             
+  on:                                                                                                                                                
     workflow_call:                                                                                                                                   
       inputs:                                                                                                                                        
         environment:                                                                                                                                 
           type: string                                                                                                                               
           required: true                                                                                                                             
-        manifest: 
+        manifest:                                                                                                                                    
           type: string                                                                                                                               
-          required: true
+          required: true                                                                                                                             
                                                                                                                                                      
-  jobs:           
+  jobs:                                                                                                                                              
     deploy-frontend:                                                                                                                                 
       if: ${{ fromJSON(inputs.manifest)['ecommerce-app']['dnarlakanti/ecommerce-frontend'].deploy }}                                                 
       uses: dnarlakanti-IN-297/ecommerce-app/.cloudbees/workflows/frontend-deploy.yaml                                                               
@@ -32,4 +32,4 @@
       uses: dnarlakanti-IN-297/ecommerce-app/.cloudbees/workflows/database-deploy.yaml                                                               
       with:                                                                                                                                          
         artifact-id: ${{ fromJSON(inputs.manifest)['ecommerce-app']['database'].id }}                                                                
-        environment: ${{ inputs.environment }} 
+        environment: ${{ inputs.environment }}
