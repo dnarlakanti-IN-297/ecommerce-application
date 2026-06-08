@@ -10,7 +10,10 @@ on:
         required: true                                                                                                                             
       manifest:                                                                                                                                    
         type: string                                                                                                                               
-        required: true                                                                                                                             
+        required: true       
+      kubeconfig:                                                                                                                                  
+        type: string                                                                                                                               
+        required: true                                                                                                                       
                                                                                                                                                    
 jobs:                                                                                                                                              
   deploy-database:                                                                                                                                 
