@@ -37,9 +37,9 @@ jobs:
       environment: ${{ job.environment }}
       kubeconfig: ${{ secrets.KUBECONFIG }}
   dev:
-    environment: dev
     uses: ./.cloudbees/workflows/deployer.yaml
     with:
       manifest: ${{ inputs.manifest }}
       environment: ${{ job.environment }}
       kubeconfig: ${{ secrets.KUBECONFIG }}
+    secrets: inherit
