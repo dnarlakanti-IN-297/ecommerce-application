@@ -14,30 +14,30 @@ on:
                                                                                                                                                    
 jobs:                                   
   deploy-database:                                                                                                                                 
-    if: ${{ fromJSON(inputs.manifest)['ecommerce-app']['ecommerce-database'].deploy }}                                                             
+    if: ${{ fromJSON(inputs.manifest)['ecommerce-application']['ecommerce-database'].deploy }}                                                             
     uses: dnarlakanti-IN-297/ecommerce-database/.cloudbees/workflows/deploy.yaml                                                                   
     with:                                                                                                                                          
-      artifact-id: ${{ fromJSON(inputs.manifest)['ecommerce-app']['ecommerce-database'].id }}                                                      
+      artifact-id: ${{ fromJSON(inputs.manifest)['ecommerce-application']['ecommerce-database'].id }}                                                      
       environment: ${{ inputs.environment }}                                                                                                       
     secrets: inherit                                                                                                                               
     vars: inherit                                                                                                                                  
                                                                                                                                                    
   deploy-backend:                                                                                                                                  
     needs: deploy-database                                                                                                                         
-    if: ${{ fromJSON(inputs.manifest)['ecommerce-app']['ecommerce-backend'].deploy }}                                                              
+    if: ${{ fromJSON(inputs.manifest)['ecommerce-application']['ecommerce-backend'].deploy }}                                                              
     uses: dnarlakanti-IN-297/ecommerce-backend/.cloudbees/workflows/deploy.yaml                                                                    
     with:                                                                                                                                          
-      artifact-id: ${{ fromJSON(inputs.manifest)['ecommerce-app']['ecommerce-backend'].id }}                                                       
+      artifact-id: ${{ fromJSON(inputs.manifest)['ecommerce-application']['ecommerce-backend'].id }}                                                       
       environment: ${{ inputs.environment }}                                                                                                       
     secrets: inherit                                                                                                                               
     vars: inherit                                                                                                                                  
                                                                                                                                                    
   deploy-frontend:                                                                                                                                 
     needs: deploy-backend                                                                                                                          
-    if: ${{ fromJSON(inputs.manifest)['ecommerce-app']['ecommerce-frontend'].deploy }}                                                             
+    if: ${{ fromJSON(inputs.manifest)['ecommerce-application']['ecommerce-frontend'].deploy }}                                                             
     uses: dnarlakanti-IN-297/ecommerce-frontend/.cloudbees/workflows/deploy.yaml                                                                   
     with:                                                                                                                                          
-      artifact-id: ${{ fromJSON(inputs.manifest)['ecommerce-app']['ecommerce-frontend'].id }}                                                      
+      artifact-id: ${{ fromJSON(inputs.manifest)['ecommerce-application']['ecommerce-frontend'].id }}                                                      
       environment: ${{ inputs.environment }}                                                                                                       
     secrets: inherit                                                                                                                               
     vars: inherit 
