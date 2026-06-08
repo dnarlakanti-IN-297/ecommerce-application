@@ -18,14 +18,18 @@
       uses: dnarlakanti-IN-297/ecommerce-app/.cloudbees/workflows/frontend-deploy.yaml                                                               
       with:                                                                                                                                          
         artifact-id: ${{ fromJSON(inputs.manifest)['ecommerce-app']['dnarlakanti/ecommerce-frontend'].id }}                                          
-        environment: ${{ inputs.environment }}                                                                                                       
+        environment: ${{ inputs.environment }}    
+      secrets: inherit
+      vars: inherit                                                                                                   
                                                                                                                                                      
     deploy-backend:                                                                                                                                  
       if: ${{ fromJSON(inputs.manifest)['ecommerce-app']['dnarlakanti/ecommerce-backend'].deploy }}                                                  
       uses: dnarlakanti-IN-297/ecommerce-app/.cloudbees/workflows/backend-deploy.yaml                                                                
       with:                                                                                                                                          
         artifact-id: ${{ fromJSON(inputs.manifest)['ecommerce-app']['dnarlakanti/ecommerce-backend'].id }}                                           
-        environment: ${{ inputs.environment }}                                                                                                       
+        environment: ${{ inputs.environment }} 
+      secrets: inherit
+      vars: inherit                                                                                                      
                                                                                                                                                      
     deploy-database:                                                                                                                                 
       if: ${{ fromJSON(inputs.manifest)['ecommerce-app']['database'].deploy }}                                                                       
@@ -33,3 +37,5 @@
       with:                                                                                                                                          
         artifact-id: ${{ fromJSON(inputs.manifest)['ecommerce-app']['database'].id }}                                                                
         environment: ${{ inputs.environment }}
+      secrets: inherit
+      vars: inherit
