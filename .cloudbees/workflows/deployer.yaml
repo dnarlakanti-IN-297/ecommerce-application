@@ -16,13 +16,13 @@ on:
         required: true                                                                                                                       
                                                                                                                                                    
 jobs:                                                                                                                                              
-  deploy-database:                                                                                                                                 
+  deploy-database:
     if: ${{ fromJSON(inputs.manifest)['ecommerce-database'].deploy }}
-    uses: dnarlakanti-IN-297/ecommerce-database/.cloudbees/workflows/deploy.yaml                                                                   
-    with:                                                                                                                                          
-      artifact-id: ${{ fromJSON(inputs.manifest)['ecommerce-database'].id }}                                                                       
-      environment: ${{ inputs.environment }}                                                                                                       
-      kubeconfig: ${{ secrets.KUBECONFIG }}                                                                                                        
+    uses: dnarlakanti-IN-297/ecommerce-database/.cloudbees/workflows/deploy.yaml
+    with:
+      artifact-id: ${{ fromJSON(inputs.manifest)['ecommerce-database'].id }}
+      environment: ${{ inputs.environment }}
+      kubeconfig: ${{ inputs.kubeconfig }}                                                                                                        
     secrets: inherit                                                                                                                               
     vars: inherit                                                                                                                                
                                                                                                                                                    
