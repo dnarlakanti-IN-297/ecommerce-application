@@ -25,6 +25,8 @@ metadata:
         - production
 jobs:
   staging:
+    needs:
+      - dev
     uses: ./.cloudbees/workflows/deployer.yaml
     with:
       manifest: ${{ inputs.manifest }}
@@ -33,6 +35,8 @@ jobs:
     secrets: inherit
     vars: inherit
   production:
+    needs:
+      - staging
     uses: ./.cloudbees/workflows/deployer.yaml
     with:
       manifest: ${{ inputs.manifest }}
