@@ -25,7 +25,6 @@ metadata:
         - production
 jobs:
   staging:
-    needs: dev
     uses: ./.cloudbees/workflows/deployer.yaml
     with:
       manifest: ${{ inputs.manifest }}
@@ -33,7 +32,6 @@ jobs:
       kubeconfig: ${{ inputs.kubeconfig }}
     secrets: inherit
   production:
-    needs: staging
     uses: ./.cloudbees/workflows/deployer.yaml
     with:
       manifest: ${{ inputs.manifest }}
