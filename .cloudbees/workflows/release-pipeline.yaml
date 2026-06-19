@@ -34,12 +34,12 @@ jobs:
     secrets: inherit
   production:
     needs: staging
-    environment: production
     uses: ./.cloudbees/workflows/deployer.yaml
     with:
       manifest: ${{ inputs.manifest }}
       environment: ${{ job.environment }}
       kubeconfig: ${{ inputs.kubeconfig }}
+    secrets: inherit
   dev:
     environment: dev
     uses: ./.cloudbees/workflows/deployer.yaml
