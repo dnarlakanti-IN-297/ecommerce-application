@@ -27,6 +27,7 @@ jobs:
   staging:
     needs:
       - dev
+    environment: staging
     uses: ./.cloudbees/workflows/deployer.yaml
     with:
       manifest: ${{ inputs.manifest }}
@@ -37,6 +38,7 @@ jobs:
   production:
     needs:
       - staging
+    environment: prod
     uses: ./.cloudbees/workflows/deployer.yaml
     with:
       manifest: ${{ inputs.manifest }}
