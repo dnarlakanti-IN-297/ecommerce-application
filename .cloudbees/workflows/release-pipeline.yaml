@@ -31,7 +31,7 @@ jobs:
     uses: ./.cloudbees/workflows/deployer.yaml
     with:
       manifest: ${{ inputs.manifest }}
-      environment: ${{ job.environment }}
+      environment: staging
       kubeconfig: ${{ inputs.kubeconfig }}
     secrets: inherit
     vars: inherit
@@ -42,7 +42,7 @@ jobs:
     uses: ./.cloudbees/workflows/deployer.yaml
     with:
       manifest: ${{ inputs.manifest }}
-      environment: ${{ job.environment }}
+      environment: prod
       kubeconfig: ${{ inputs.kubeconfig }}
     secrets: inherit
     vars: inherit
