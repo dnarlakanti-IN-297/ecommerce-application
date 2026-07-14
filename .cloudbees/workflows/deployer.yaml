@@ -17,14 +17,14 @@ on:
       image-tag-override:
         type: string
         required: false
-        description: "Optional. If set, deploy this exact tag to every component in this environment instead of the version in the release manifest. Leave blank for normal manifest-driven behavior."
+        description: "Optional. If set, deploy this exact Docker Hub tag (e.g. a git SHA) to every component in this environment. Leave blank to deploy 'latest', same as before this input existed. NOTE: the release manifest's per-component 'id' is a CloudBees-internal artifact identifier, not a Docker tag, and cannot be used directly as image.tag - see https://docs.cloudbees.com/docs/cloudbees-platform/latest/applications/releases"
 
 jobs:
   deploy-database:
     if: ${{ fromJSON(inputs.manifest)['ecommerce-database'].deploy }}
     uses: dnarlakanti-IN-297/ecommerce-database/.cloudbees/workflows/deploy.yaml
     with:
-      artifact-id: ${{ inputs.image-tag-override || fromJSON(inputs.manifest)['ecommerce-database'].id }}
+      artifact-id: ${{ inputs.image-tag-override || 'latest' }}
       environment: ${{ inputs.environment }}
       kubeconfig: ${{ inputs.kubeconfig }}
     secrets: inherit
@@ -35,7 +35,7 @@ jobs:
     if: ${{ fromJSON(inputs.manifest)['ecommerce-backend'].deploy }}
     uses: dnarlakanti-IN-297/ecommerce-backend/.cloudbees/workflows/deploy.yaml
     with:
-      artifact-id: ${{ inputs.image-tag-override || fromJSON(inputs.manifest)['ecommerce-backend'].id }}
+      artifact-id: ${{ inputs.image-tag-override || 'latest' }}
       environment: ${{ inputs.environment }}
       kubeconfig: ${{ inputs.kubeconfig }}
     secrets: inherit
@@ -46,7 +46,7 @@ jobs:
     if: ${{ fromJSON(inputs.manifest)['ecommerce-frontend'].deploy }}
     uses: dnarlakanti-IN-297/ecommerce-frontend/.cloudbees/workflows/deploy.yaml
     with:
-      artifact-id: ${{ inputs.image-tag-override || fromJSON(inputs.manifest)['ecommerce-frontend'].id }}
+      artifact-id: ${{ inputs.image-tag-override || 'latest' }}
       environment: ${{ inputs.environment }}
       kubeconfig: ${{ inputs.kubeconfig }}
     secrets: inherit
