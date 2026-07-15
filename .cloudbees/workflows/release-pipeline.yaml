@@ -12,18 +12,6 @@ on:
         type: string
         required: true
         description: Kubernetes config for cluster access
-      dev-image-tag-override:
-        type: string
-        required: false
-        description: "Optional. Deploy this exact tag to dev instead of the release manifest's version."
-      staging-image-tag-override:
-        type: string
-        required: false
-        description: "Optional. Deploy this exact tag to staging instead of the release manifest's version."
-      prod-image-tag-override:
-        type: string
-        required: false
-        description: "Optional. Deploy this exact tag to prod instead of the release manifest's version."
 metadata:
   stages/v1alpha1:
     - name: Deploy to Dev
@@ -45,7 +33,6 @@ jobs:
       manifest: ${{ inputs.manifest }}
       environment: staging
       kubeconfig: ${{ inputs.kubeconfig }}
-      image-tag-override: ${{ inputs.staging-image-tag-override }}
     secrets: inherit
     vars: inherit
   production:
@@ -57,7 +44,6 @@ jobs:
       manifest: ${{ inputs.manifest }}
       environment: prod
       kubeconfig: ${{ inputs.kubeconfig }}
-      image-tag-override: ${{ inputs.prod-image-tag-override }}
     secrets: inherit
     vars: inherit
   dev:
@@ -67,6 +53,5 @@ jobs:
       manifest: ${{ inputs.manifest }}
       environment: ${{ job.environment }}
       kubeconfig: ${{ inputs.kubeconfig }}
-      image-tag-override: ${{ inputs.dev-image-tag-override }}
     secrets: inherit
     vars: inherit
