@@ -12,6 +12,8 @@ metadata:
   stages/v1alpha1:
     - name: Deploy to Dev
       jobs:
+        - test-backend
+        - test-frontend
         - dev
     - name: Deploy to Staging
       jobs:
