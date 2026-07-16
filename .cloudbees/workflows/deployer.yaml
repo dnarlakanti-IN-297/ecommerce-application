@@ -11,8 +11,8 @@ on:
       manifest:
         type: string
         required: true
-      kubeconfig:
-        type: string
+    secrets:
+      KUBECONFIG:
         required: true
 
 jobs:
@@ -22,7 +22,6 @@ jobs:
     with:
       artifact-id: latest
       environment: ${{ inputs.environment }}
-      kubeconfig: ${{ inputs.kubeconfig }}
     secrets: inherit
     vars: inherit
 
@@ -33,7 +32,6 @@ jobs:
     with:
       artifact-id: latest
       environment: ${{ inputs.environment }}
-      kubeconfig: ${{ inputs.kubeconfig }}
     secrets: inherit
     vars: inherit
 
@@ -44,6 +42,5 @@ jobs:
     with:
       artifact-id: latest
       environment: ${{ inputs.environment }}
-      kubeconfig: ${{ inputs.kubeconfig }}
     secrets: inherit
     vars: inherit
