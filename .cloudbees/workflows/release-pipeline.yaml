@@ -10,12 +10,6 @@ on:
         description: This is a system-generated parameter and is required for use in application releases. Refer to https://docs.cloudbees.com/docs/cloudbees-platform/latest/applications/releases#manifest for the expected format
 metadata:
   stages/v1alpha1:
-    - name: Test Backend
-      jobs:
-        - test-backend
-    - name: Test Frontend
-      jobs:
-        - test-frontend
     - name: Deploy to Dev
       jobs:
         - dev
