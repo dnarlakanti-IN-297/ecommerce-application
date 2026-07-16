@@ -12,8 +12,6 @@ metadata:
   stages/v1alpha1:
     - name: Deploy to Dev
       jobs:
-        - test-backend
-        - test-frontend
         - dev
     - name: Deploy to Staging
       jobs:
@@ -21,8 +19,12 @@ metadata:
     - name: Deploy to Prod
       jobs:
         - production
+        - test-backend
+        - test-frontend
 jobs:
   test-backend:
+    needs:
+      - staging
     steps:
       - name: Checkout backend
         uses: cloudbees-io/checkout@v1
@@ -79,6 +81,8 @@ jobs:
           failed-tests: ${{ steps.test-summary.outputs.FAILED_TESTS }}
 
   test-frontend:
+    needs:
+      - staging
     steps:
       - name: Checkout frontend
         uses: cloudbees-io/checkout@v1
