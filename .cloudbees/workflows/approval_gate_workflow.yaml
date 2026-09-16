@@ -29,6 +29,8 @@ jobs:
     with:
       manifest: ${{ inputs.manifest }}
       environment: ${{ job.environment }}
+    secrets: inherit
+    vars: inherit
     needs: dev
   production:
     needs: staging
@@ -37,12 +39,16 @@ jobs:
     with:
       manifest: ${{ inputs.manifest }}
       environment: ${{ job.environment }}
+    secrets: inherit
+    vars: inherit
   dev:
     environment: dev
     uses: ./.cloudbees/workflows/deployer.yaml
     with:
       manifest: ${{ inputs.manifest }}
       environment: ${{ job.environment }}
+    secrets: inherit
+    vars: inherit
     needs: Approval_gate
   Approval_gate:
     timeout-minutes: 30
