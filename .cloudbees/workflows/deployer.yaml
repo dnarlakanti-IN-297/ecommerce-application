@@ -16,6 +16,11 @@ on:
         required: true
 
 jobs:
+  test-marker:
+   steps:
+     - name: snapshot-check
+       run: echo "MARKER-V2-$(date +%s)"
+
   deploy-database:
     if: ${{ fromJSON(inputs.manifest)['ecommerce-database'].deploy }}
     uses: dnarlakanti-IN-297/ecommerce-database/.cloudbees/workflows/deploy.yaml
