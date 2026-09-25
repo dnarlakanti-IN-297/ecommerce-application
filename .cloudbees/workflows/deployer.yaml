@@ -19,6 +19,7 @@ jobs:
   test-marker:
    steps:
      - name: snapshot-check
+       uses: docker://alpine:3.19
        run: echo "MARKER-V2-$(date +%s)"
 
   deploy-database:
